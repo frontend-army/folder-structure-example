@@ -1,30 +1,44 @@
-# React + TypeScript + Vite
+# Folder Structure Example
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a rough example of how we usually like to structure folders in a Front-End application.
+This example was created using React + Vite, but it can be extrapolated to other frameworks.
 
-Currently, two official plugins are available:
+## General idea
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The overall concept is that all files should be in the lowest possible folder where all its consumers can use it. For example, a global component such as `Button` will be in a `components` folder at the root of the project because it will be used across most components, whereas a component `UsersTable` will probably be only used in a `UsersPage` screen component, and so it will be located under the `UsersPage` component folder. 
 
-## Expanding the ESLint configuration
+Some key concepts:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Global files/folders will be directly under `src` (e.g. `redux`, `constants`, generic components like Button, Input, etc.)
+- Pages components will be under an `app` or `pages` folder inside `src`.
+- Each component can have its utility files (helpers, styles, hooks, etc.)
+- A sub-component only used as a child of parent component will be under its parent component's folder.
+- If a component is used by two or more components, it will be placed in the lowest common parent folder for those components.
 
-- Configure the top-level `parserOptions` property like this:
+## Refactor
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+When the project gets bigger and more components and screens are created, the original idea of where components will be used can change. For example, the `UsersTable` mentioned before might be needed in a new page called `AdminUsers`, which is in the same level as the `UsersPage`. In that case, we can refactor and move the `UsersTable` component one level up the folder structure so it can be used by both pages.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Note
+
+All code and files are illustrative examples, this application is not intended to be run nor to work, it's just an example of how we like files and folders to be organized in a Front-End project.
+
+## Feedback
+
+We are open to feedback! Feel free to open an Issue.
+
+Please, if you wish to help developing these or other open source tools let us know via our social media:
+
+- [Twitter](twitter.com/frontend_army)
+- [Discord](https://t.co/Y46bYpwExU)
+
+### License
+
+Copyright 2024 Frontend Army
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
